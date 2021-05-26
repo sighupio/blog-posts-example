@@ -1,0 +1,15 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-configuration
+  labels:
+    app: ingress-nginx
+data:
+  proxy-body-size: 10m
+  http-redirect-code: "301"
+  enable-access-log-for-default-backend: "true"

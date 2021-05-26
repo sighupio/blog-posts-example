@@ -1,0 +1,5 @@
+bases:
+  - name: monitoring
+    version: add-prometheus-adapter
+  - name: ingress
+    version: v1.9.1

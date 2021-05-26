@@ -1,0 +1,18 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+namespace: monitoring
+
+bases:
+  - dashboards
+
+images:
+- name: quay.io/coreos/kube-state-metrics
+  newName: reg.sighup.io/sighupio/fury/coreos/kube-state-metrics
+  newTag: v1.9.7
+
+resources:
+- deploy.yml
+- rbac.yml
+- sm.yml

@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: autoscale-all-the-things
+  name: apache2
+  labels:
+    app: apache2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache2
+  template:
+    metadata:
+      labels:
+        app: apache2
+    spec:
+      containers:
+        - name: httpd
+          image: httpd:2.4.46
+          ports:
+            - containerPort: 80

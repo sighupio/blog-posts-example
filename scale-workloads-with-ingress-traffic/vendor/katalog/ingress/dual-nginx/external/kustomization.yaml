@@ -1,0 +1,35 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../nginx/bases/controller
+
+nameSuffix: "-external"
+
+commonLabels:
+  app: ingress
+  type: external
+
+patchesJson6902:
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: nginx-ingress-controller
+    path: patch/daemonset.yml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: ingress-nginx
+    path: patch/service.yml
+  - target:
+      group: ""
+      version: v1
+      kind: ConfigMap
+      name: nginx-configuration
+    path: patch/cm.yml

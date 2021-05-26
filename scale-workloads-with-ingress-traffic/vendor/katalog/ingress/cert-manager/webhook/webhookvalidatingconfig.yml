@@ -1,0 +1,75 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: cert-manager-webhook
+  labels:
+    app: webhook
+  annotations:
+    cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
+webhooks:
+  - name: webhook.cert-manager.io
+    rules:
+      - apiGroups:
+          - "cert-manager.io"
+          - "acme.cert-manager.io"
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - "*/*"
+    admissionReviewVersions: ["v1", "v1beta1"]
+    failurePolicy: Fail
+    # Only include 'sideEffects' field in Kubernetes 1.12+
+    sideEffects: None
+    clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: "cert-manager"
+        path: /mutate
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: cert-manager-webhook
+  labels: {}
+  annotations:
+    cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
+webhooks:
+  - name: webhook.cert-manager.io
+    namespaceSelector:
+      matchExpressions:
+      - key: "cert-manager.io/disable-validation"
+        operator: "NotIn"
+        values:
+        - "true"
+      - key: "name"
+        operator: "NotIn"
+        values:
+        - cert-manager
+    rules:
+      - apiGroups:
+          - "cert-manager.io"
+          - "acme.cert-manager.io"
+        apiVersions:
+          - "*"
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - "*/*"
+    admissionReviewVersions: ["v1", "v1beta1"]
+    failurePolicy: Fail
+    # Only include 'sideEffects' field in Kubernetes 1.12+
+    sideEffects: None
+    clientConfig:
+      service:
+        name: cert-manager-webhook
+        namespace: "cert-manager"
+        path: /validate

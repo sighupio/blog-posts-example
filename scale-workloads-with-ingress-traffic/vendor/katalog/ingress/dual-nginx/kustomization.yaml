@@ -1,0 +1,25 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - internal
+  - external
+  - ../nginx/bases/configs
+
+patchesJson6902:
+  - target:
+      group: rbac.authorization.k8s.io
+      version: v1
+      kind: Role
+      name: nginx-ingress-role
+    path: patch/rbac.yml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: ingress-nginx-metrics
+    path: patch/sm-service.yml

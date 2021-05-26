@@ -1,0 +1,24 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: apache2
+  namespace: autoscale-all-the-things
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: apache2
+  minReplicas: 1
+  maxReplicas: 100
+  metrics:
+    - type: Object
+      object:
+        metric:
+          name: nginx_ingress_controller_requests_rate
+        describedObject:
+          apiVersion: extensions/v1beta1
+          kind: Ingress
+          name: apache2
+        target:
+          type: AverageValue
+          averageValue: "100"

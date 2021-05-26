@@ -1,0 +1,23 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+namespace: monitoring
+
+images:
+  - name: quay.io/prometheus-operator/prometheus-operator
+    newName: reg.sighup.io/sighupio/fury/prometheus-operator
+    newTag: v0.44.1
+
+resources: 
+  - deploy.yml
+  - rbac.yml
+  - ns.yml
+  - crd-rule.yml
+  - crd-prometheus.yml
+  - crd-alertmanager.yml
+  - crd-servicemonitor.yml
+  - crd-thanosruler.yml
+  - crd-probes.yml
+  - crd-podmonitor.yml
+  - sm.yml
