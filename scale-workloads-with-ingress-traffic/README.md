@@ -1,6 +1,6 @@
 # Scale workloads with ingress traffic
 
-Main article here: 
+Main article here: https://blog.sighup.io/scale-workloads-with-ingress-traffic/
 
 ## Prerequisites
 
