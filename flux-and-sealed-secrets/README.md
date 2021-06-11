@@ -24,10 +24,16 @@ export GITHUB_USER=<MY_GITHUB_USER> (e.g. nikever)
 
 ## 1. Start Minikube cluster
 
-At the root level of this repository, execute:
+Clone this repository:
 
 ```bash
-cd flux-and-sealed-secrets
+git clone https://github.com/sighupio/blog-posts-example
+```
+
+Execute:
+
+```bash
+cd blog-posts-example/flux-and-sealed-secrets
 export REPO_DIR=$(PWD)
 ```
 
