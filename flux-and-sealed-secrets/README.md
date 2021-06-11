@@ -78,6 +78,7 @@ kubectl get pods -n flux-system -w
 3. Clone the `demo-flux-secrets-fleet` repository
 
 ```bash
+cd $REPO_DIR
 git clone https://github.com/$GITHUB_USER/demo-flux-secrets-fleet
 cd demo-flux-secrets-fleet/
 ```
