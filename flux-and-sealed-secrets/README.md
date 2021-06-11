@@ -27,6 +27,7 @@ export GITHUB_USER=<MY_GITHUB_USER> (e.g. nikever)
 At the root level of this repository, execute:
 
 ```bash
+cd flux-and-sealed-secrets
 export REPO_DIR=$(PWD)
 ```
 
