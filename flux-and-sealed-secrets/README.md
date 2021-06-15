@@ -2,6 +2,8 @@
 
 This repository contains a quick demo on secrets management with Bitnami Sealed Secrets in a Flux workflow.
 
+This demo is related to [this article](https://blog.sighup.io/sealed-secrets-in-gitops/)
+
 ## Prerequisites
 
 To follow this tutorial, you need:
