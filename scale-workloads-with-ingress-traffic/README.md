@@ -8,6 +8,7 @@ Main article here: https://blog.sighup.io/scale-workloads-with-ingress-traffic/
 - `kubectl` 1.18
 - `hey` https://github.com/rakyll/hey
 - `jq` https://github.com/stedolan/jq
+- `furyctl` https://github.com/sighupio/furyctl
 
 ## How to
 
@@ -19,10 +20,13 @@ Bring up your node with:
 minikube start --vm-driver=virtualbox --kubernetes-version v1.18.10 --memory=6000m --cpus=3
 ```
 
-We will then use furyctl to download all the component we will install on the cluster (all the manifests are already downloaded in this directory btw):
+We will then use furyctl to download all the component we will install on the cluster (all the manifests are already downloaded in this directory, you can skip this step):
 
 ```bash
+# if using furyctl version <1.0.0
 furyctl vendor -H
+# if using furyctl version >=1.0.0 
+furyctl distribution download -H
 ```
 
 Install all the Fury components in your minikube node with:
